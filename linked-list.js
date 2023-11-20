@@ -1,6 +1,11 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable class-methods-use-this */
 import Node from './node.js';
+
+function getValue(index, nodeObj) {
+  if (index === 0) {
+    return nodeObj;
+  }
+  return getValue(index - 1, nodeObj.next);
+}
 
 export default class LinkedList {
   constructor() {
@@ -10,15 +15,31 @@ export default class LinkedList {
   }
 
   append(value) {
-    this.listSize += 1;
     const node = new Node(value);
-    this.headNode === null ? (this.headNode = node) : (this.tailNode = node);
+    if (this.headNode === null) {
+      this.headNode = node;
+      this.tailNode = node;
+    } else {
+      this.tailNode.next = node;
+      this.tailNode = node;
+    }
+
+    this.listSize += 1;
   }
 
   prepend(value) {
-    this.listSize += 1;
     const node = new Node(value, this.headNode);
+    node.next = this.headNode;
     this.headNode = node;
+
+    this.listSize += 1;
+  }
+
+  at(index) {
+    if (index < 0 || index >= this.listSize) {
+      return null;
+    }
+    return getValue(index, this.headNode);
   }
 
   get size() {

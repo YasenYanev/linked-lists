@@ -4,12 +4,13 @@ const list = new LinkedList();
 
 list.append('First Node');
 
-console.log(list);
-
-list.prepend('Second Node');
-
-console.log(list);
+list.append('Second Node');
 
 list.append('Third Node');
 
 console.log(list);
+
+list.prepend('Fourth Node');
+console.log(list);
+
+console.log(list.at(0));
