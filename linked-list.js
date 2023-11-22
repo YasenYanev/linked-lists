@@ -1,10 +1,14 @@
+/* eslint-disable no-else-return */
 import Node from './node.js';
 
-function getValue(index, nodeObj) {
-  if (index === 0) {
+function traverseList(index, nodeObj, mode) {
+  if (mode === 'getNode' && index === 0) {
+    return nodeObj;
+  } else if (mode === 'pop' && index === 2) {
     return nodeObj;
   }
-  return getValue(index - 1, nodeObj.next);
+  // getIndex
+  return traverseList(index - 1, nodeObj.next, mode);
 }
 
 export default class LinkedList {
@@ -39,7 +43,16 @@ export default class LinkedList {
     if (index < 0 || index >= this.listSize) {
       return null;
     }
-    return getValue(index, this.headNode);
+    return traverseList(index, this.headNode, 'getNode');
+  }
+
+  pop() {
+    const penultimateNode = traverseList(this.listSize, this.headNode, 'pop');
+    console.log(penultimateNode);
+    penultimateNode.next = null;
+    this.tailNode = penultimateNode;
+
+    this.listSize -= 1;
   }
 
   get size() {
