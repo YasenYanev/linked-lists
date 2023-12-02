@@ -82,6 +82,22 @@ export default class LinkedList {
     this.listSize -= 1;
   }
 
+  toString() {
+    if (this.headNode === null) return 'List is empty';
+    let counter = 0;
+    let string = `(${this.headNode.value})`;
+
+    while (counter < this.listSize) {
+      const currentNode = this.at(counter);
+      string += ` -> (${
+        currentNode.next !== null ? currentNode.next.value : currentNode.next
+      })`;
+      counter += 1;
+    }
+
+    return string;
+  }
+
   get size() {
     return this.listSize;
   }
