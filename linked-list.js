@@ -14,10 +14,10 @@ export default class LinkedList {
   }
 
   #traverseList(
-    mode, // Mode
-    index = this.listSize, // Starting index
+    mode,                     // Mode
+    index = this.listSize,    // Starting index
     compareValue = undefined, // Value to compare to(if any)
-    nodeObj = this.headNode // Current node
+    nodeObj = this.headNode   // Current node
   ) {
     if ((mode === 'a1' && index === 0) || (mode === 'a2' && index === 2)) {
       return nodeObj;
@@ -66,20 +66,20 @@ export default class LinkedList {
     return this.#traverseList('a1', index);
   }
 
-  contains(value) {
-    return this.#traverseList('b1', undefined, value).b1;
-  }
-
-  find(value) {
-    return this.#traverseList('b2', undefined, value).b2;
-  }
-
   pop() {
     const penultimateNode = this.#traverseList('a2');
     penultimateNode.next = null;
     this.tailNode = penultimateNode;
 
     this.listSize -= 1;
+  }
+
+  contains(value) {
+    return this.#traverseList('b1', undefined, value).b1;
+  }
+
+  find(value) {
+    return this.#traverseList('b2', undefined, value).b2;
   }
 
   toString() {
